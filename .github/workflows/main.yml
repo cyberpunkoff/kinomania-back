@@ -37,7 +37,7 @@ jobs:
           container-name: kinomania-back
           folder-id: ${{ secrets.YC_SLS_FOLDER_ID }}
           revision-service-account-id: ${{ secrets.YC_SERVICE_ACCOUNT_ID }}
-          revision-secrets: ${{ YC_LOCKBOX_SECRETS }}
+          revision-secrets: ${{ secrets.YC_LOCKBOX_SECRETS }}
           revision-cores: 2
           revision-memory: 512Mb
           revision-core-fraction: 100
