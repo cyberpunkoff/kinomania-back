@@ -11,6 +11,6 @@ WORKDIR /opt/app
 
 EXPOSE 8080
 
-COPY --from=builder /opt/app/build/libs/*.jar /opt/app/*.jar
+COPY --from=build /opt/app/build/libs/*.jar /opt/app/*.jar
 
 ENTRYPOINT ["java", "-jar", "/opt/app/*.jar"]
