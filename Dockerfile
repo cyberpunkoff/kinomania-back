@@ -9,8 +9,6 @@ RUN gradle clean bootJar
 FROM eclipse-temurin:21.0.2_13-jre-jammy AS run
 WORKDIR /opt/app
 
-EXPOSE 8080
-
 COPY --from=build /opt/app/build/libs/*.jar /opt/app/*.jar
 
 ENTRYPOINT ["java", "-jar", "/opt/app/*.jar"]
