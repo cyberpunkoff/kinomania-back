@@ -37,9 +37,10 @@ jobs:
           container-name: kinomania-back
           folder-id: ${{ secrets.YC_SLS_FOLDER_ID }}
           revision-service-account-id: ${{ secrets.YC_SERVICE_ACCOUNT_ID }}
+          revision-secrets: ${{ YC_LOCKBOX_SECRETS }}
           revision-cores: 2
           revision-memory: 512Mb
           revision-core-fraction: 100
-          revision-concurrency: 8
+          revision-concurrency: 4
           revision-image-url: cr.yandex/${{ env.CR_REGISTRY }}/${{ env.CR_REPOSITORY }}:${{ env.IMAGE_TAG }}
           revision-execution-timeout: 10
