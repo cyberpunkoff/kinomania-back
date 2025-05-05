@@ -20,3 +20,8 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+
+kinopoisk:
+  api:
+    url: ${KINOPOISK_API_URL:}
+    key: ${KINOPOISK_API_KEY:}
