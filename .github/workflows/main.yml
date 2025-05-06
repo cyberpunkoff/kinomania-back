@@ -37,10 +37,17 @@ jobs:
           container-name: kinomania-back
           folder-id: ${{ secrets.YC_SLS_FOLDER_ID }}
           revision-service-account-id: ${{ secrets.YC_SERVICE_ACCOUNT_ID }}
-          revision-secrets: ${{ secrets.YC_LOCKBOX_SECRETS }}
+          revision-secrets: |
+            DB_URL=${{ secrets.YC_LOCKBOX_DB_URL }}
+            DB_USERNAME=${{ secrets.YC_LOCKBOX_DB_USERNAME }}
+            DB_PASSWORD=${{ secrets.YC_LOCKBOX_DB_PASSWORD }}
+            ISSUER_URI=${{ secrets.YC_LOCKBOX_AUTH0_ISSUER_URI }}
+            KINOPOISK_API_URL=${{ secrets.YC_LOCKBOX_KINOPOISK_API_URL }}
+            KINOPOISK_API_KEY=${{ secrets.YC_LOCKBOX_KINOPOISK_API_KEY }}
           revision-cores: 2
-          revision-memory: 512Mb
           revision-core-fraction: 100
+          revision-memory: 512Mb
+          revision-provisioned: 1
           revision-concurrency: 4
           revision-image-url: cr.yandex/${{ env.CR_REGISTRY }}/${{ env.CR_REPOSITORY }}:${{ env.IMAGE_TAG }}
           revision-execution-timeout: 10
