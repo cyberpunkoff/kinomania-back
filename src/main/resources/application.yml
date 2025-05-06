@@ -25,3 +25,9 @@ kinopoisk:
   api:
     url: ${KINOPOISK_API_URL:}
     key: ${KINOPOISK_API_KEY:}
+
+logging:
+  level:
+    org:
+      springframework:
+        security: TRACE
