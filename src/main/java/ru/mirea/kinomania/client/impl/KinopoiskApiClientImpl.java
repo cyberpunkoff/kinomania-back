@@ -53,8 +53,8 @@ public class KinopoiskApiClientImpl implements KinopoiskApiClient {
                     ratingTo,
                     yearFrom,
                     yearTo,
-                    search, // keyword
-                    1); // page
+                    search,
+                    1); // get only first page
             
             return mapFilmsToMedia(response.getItems());
         } catch (FeignException e) {
@@ -81,16 +81,16 @@ public class KinopoiskApiClientImpl implements KinopoiskApiClient {
     public List<Media> getPopularMedia() {
         try {
             KinopoiskFilmsResponse response = kinopoiskFeignClient.getFilms(
-                    null, // countries
-                    null, // genres
-                    "NUM_VOTE", // order by number of votes
-                    "ALL", // type
-                    8.0, // minimum rating
-                    null, // maximum rating
-                    null, // minimum year
-                    null, // maximum year
-                    null, // keyword
-                    1); // page
+                    null,
+                    null,
+                    "NUM_VOTE",
+                    "ALL",
+                    8.0,
+                    null,
+                    null,
+                    null,
+                    null,
+                    1);
             
             return mapFilmsToMedia(response.getItems());
         } catch (FeignException e) {
@@ -102,20 +102,19 @@ public class KinopoiskApiClientImpl implements KinopoiskApiClient {
     @Override
     public List<Media> getNewMedia() {
         try {
-            // Получаем текущий год
             int currentYear = java.time.Year.now().getValue();
             
             KinopoiskFilmsResponse response = kinopoiskFeignClient.getFilms(
-                    null, // countries
-                    null, // genres
-                    "YEAR", // order by year
-                    "ALL", // type
-                    null, // minimum rating
-                    null, // maximum rating
-                    currentYear - 1, // current year - 1
-                    currentYear, // current year
-                    null, // keyword
-                    1); // page
+                    null,
+                    null,
+                    "YEAR",
+                    "ALL",
+                    null,
+                    null,
+                    currentYear - 1,
+                    currentYear,
+                    null,
+                    1); // get only first page
             
             return mapFilmsToMedia(response.getItems());
         } catch (FeignException e) {
