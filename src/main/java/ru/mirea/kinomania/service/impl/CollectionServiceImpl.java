@@ -34,9 +34,14 @@ public class CollectionServiceImpl implements CollectionService {
 
         return collections;
     }
-    
+
     @Override
     public Collection getCollectionById(String id) {
+        return collectionRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Collection", id));
+    }
+
+    public Collection getCollectionByIdForCurrentUser(String id) {
         String userId = userService.getCurrentUserId();
         return collectionRepository.findById(id)
                 .filter(collection -> collection.getUserId().equals(userId))
@@ -60,7 +65,7 @@ public class CollectionServiceImpl implements CollectionService {
     @Override
     @Transactional
     public Collection updateCollection(String id, String name) {
-        Collection collection = getCollectionById(id);
+        Collection collection = getCollectionByIdForCurrentUser(id);
         collection.setName(name);
         return collectionRepository.save(collection);
     }
@@ -68,14 +73,14 @@ public class CollectionServiceImpl implements CollectionService {
     @Override
     @Transactional
     public void deleteCollection(String id) {
-        Collection collection = getCollectionById(id);
+        Collection collection = getCollectionByIdForCurrentUser(id);
         collectionRepository.delete(collection);
     }
     
     @Override
     @Transactional
     public boolean addMediaToCollection(String collectionId, String mediaId) {
-        Collection collection = getCollectionById(collectionId);
+        Collection collection = getCollectionByIdForCurrentUser(collectionId);
         
         if (collection.getItems().contains(mediaId)) {
             return false;
@@ -89,7 +94,7 @@ public class CollectionServiceImpl implements CollectionService {
     @Override
     @Transactional
     public void removeMediaFromCollection(String collectionId, String mediaId) {
-        Collection collection = getCollectionById(collectionId);
+        Collection collection = getCollectionByIdForCurrentUser(collectionId);
         collection.getItems().remove(mediaId);
         collectionRepository.save(collection);
     }
@@ -97,7 +102,7 @@ public class CollectionServiceImpl implements CollectionService {
     @Override
     @Transactional
     public boolean reorderCollectionItems(String collectionId, List<String> itemIds) {
-        Collection collection = getCollectionById(collectionId);
+        Collection collection = getCollectionByIdForCurrentUser(collectionId);
         
         // Check if the new list contains exactly the same items
         if (collection.getItems().size() != itemIds.size() || 

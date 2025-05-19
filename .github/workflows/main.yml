@@ -46,7 +46,7 @@ jobs:
             KINOPOISK_API_KEY=${{ secrets.YC_LOCKBOX_KINOPOISK_API_KEY }}
           revision-cores: 2
           revision-core-fraction: 100
-          revision-memory: 512Mb
+          revision-memory: 1024Mb
           revision-provisioned: 1
           revision-concurrency: 4
           revision-image-url: cr.yandex/${{ env.CR_REGISTRY }}/${{ env.CR_REPOSITORY }}:${{ env.IMAGE_TAG }}
