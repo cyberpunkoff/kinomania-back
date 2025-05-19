@@ -44,7 +44,7 @@ jobs:
             ISSUER_URI=${{ secrets.YC_LOCKBOX_AUTH0_ISSUER_URI }}
             KINOPOISK_API_URL=${{ secrets.YC_LOCKBOX_KINOPOISK_API_URL }}
             KINOPOISK_API_KEY=${{ secrets.YC_LOCKBOX_KINOPOISK_API_KEY }}
-          revision-cores: 2
+          revision-cores: 1
           revision-core-fraction: 100
           revision-memory: 1024Mb
           revision-provisioned: 1
